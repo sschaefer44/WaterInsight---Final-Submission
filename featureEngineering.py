@@ -5,16 +5,15 @@ import loadData
 import time
 
 def temporalFeatures(df):
-    """Create features based on time"""
+    #Create features based on time
 
-    # derive date features from dt column
     df['year'] = df['date'].dt.year
     df['month'] = df['date'].dt.month
     df['dayOfYear'] = df['date'].dt.dayofyear
     df['dayOfWeek'] = df['date'].dt.dayofweek
     df['weekOfYear'] = df['date'].dt.isocalendar().week
 
-    # Seasonal features (metorological seasons)
+    # (metorological seasons)
     df['season'] = df['month'].map({
         12: 0, 1: 0, 2: 0,  # Winter
         3: 1, 4: 1, 5: 1,   # Spring
@@ -34,7 +33,7 @@ def temporalFeatures(df):
     return df
 
 def lagFeatures(df):
-    """Create lagged features by site"""
+    #Create lagged features by site
 
     lagVals = [1, 7, 14, 30] 
 
@@ -45,7 +44,7 @@ def lagFeatures(df):
     return df
 
 def rollingFeatures(df):
-    """Create rolling window statistics by site"""
+    #Create rolling window statistics by site
 
     windows = [7, 14, 30]
 
@@ -84,7 +83,7 @@ def calculateTrend(series):
         return 0
 
 def trendFeatures(df):
-    """Create trend and delta features"""
+    #Create trend and delta features
 
     df['gageHeightDelta1D'] = df.groupby('site_code')['gage_height'].diff(1)
     df['gageHeightDelta7D'] = df.groupby('site_code')['gage_height'].diff(7)
@@ -99,7 +98,7 @@ def trendFeatures(df):
     return df
 
 def climatologyFeatures(df, train_df=None): 
-    """ Create climatology features """
+    # Create climatology features
     
     clim_data = train_df if train_df is not None else df
         
@@ -121,7 +120,7 @@ def climatologyFeatures(df, train_df=None):
     return df
 
 def siteFeatures(df, train_df=None):
-    """ Create site based features """
+    # Create site based features
     
     stats_data = train_df if train_df is not None else df
 
@@ -173,7 +172,7 @@ def crossVarFeatures(df):
     return df
 
 def categoricalEncoding(df, train_df=None):
-    """ Encode sites by average GAGE HEIGHT """
+    # Encode sites by average gage height 
     
     encoding_data = train_df if train_df is not None else df
     
