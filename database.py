@@ -11,16 +11,16 @@ DB_CONFIG = {
 }
 
 def getConnection():
-    """Create psychopg2 connection for inserts """
+    #Create psychopg2 connection for inserts 
     return psycopg2.connect(**DB_CONFIG)
 
 def getSQLAlchemyEngine():
-    """Create SQLAlchemy engine for pandas operations"""
+    #Create SQLAlchemy engine for pandas operations
     connString = f"postgresql://{DB_CONFIG['user']}:{DB_CONFIG['password']}@{DB_CONFIG['host']}/{DB_CONFIG['database']}"
     return create_engine(connString)
 
 def testConnection():
-    """Test if database connection works"""
+    #Test if database connection works
     try:
         conn = getConnection()
         cur = conn.cursor()
@@ -35,7 +35,7 @@ def testConnection():
         return False
 
 def insertSiteLocation(site_info, state_code):
-    """Insert site location data"""
+    #Insert site location data
     conn = getConnection()
     cur = conn.cursor()
     
@@ -50,7 +50,7 @@ def insertSiteLocation(site_info, state_code):
     conn.close()
 
 def insertWaterData(water_records):
-    """Insert water measurement data"""
+    #Insert water measurement data
     conn = getConnection()
     cur = conn.cursor()
     
@@ -76,7 +76,7 @@ def insertWaterData(water_records):
     return len(values)
 
 def queryWaterData(site_code, start_date, end_date):
-    """Query water data for demonstration using SQLAlchemy"""
+    #Query water data for demonstration using SQLAlchemy
     engine = getSQLAlchemyEngine()
     
     query = '''
