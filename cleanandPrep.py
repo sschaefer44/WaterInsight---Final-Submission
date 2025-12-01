@@ -6,7 +6,7 @@ from sqlalchemy import text
 import time
 
 def dataQualityCheck():
-    """Checks data quality. Identify issues before data cleaning process"""
+    # Checks data quality. Identify issues before data cleaning process
 
     engine = database.getSQLAlchemyEngine()
 
@@ -106,7 +106,7 @@ def detectOutliers(parameters, threshold, limit):
     return results
 
 def cleanDataset():
-    """ Clean the dataset: -999 (missing Vals), duplicates, impossible values, outliers"""
+    # Clean the dataset: -999 (missing Vals), duplicates, impossible values, outliers
     engine = database.getSQLAlchemyEngine()
 
     print("---------- Starting Dataset Cleaning ----------")
@@ -159,7 +159,7 @@ def cleanDataset():
     return True
 
 def verifyDatasetCleaning():
-    """Verify the dataset cleaning worked"""
+    # Verify the dataset cleaning worked
     engine = database.getSQLAlchemyEngine()
     
     print("Verficiation Report")
