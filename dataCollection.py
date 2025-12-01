@@ -6,7 +6,7 @@ import pandas as pd
 import warnings
 
 def collectStateHistorical(stateCode, startYear, endYear):
-    """Collect data for all sites in a state within a specified year range"""
+    #Collect data for all sites in a state within a specified year range
 
     sites = getSites(stateCode, f"{startYear}-01-01", f"{endYear}-12-31")
     print(f"Found {len(sites)} sites in {stateCode}")
