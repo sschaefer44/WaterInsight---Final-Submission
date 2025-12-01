@@ -13,7 +13,7 @@ np.random.seed(42)
 tf.random.set_seed(42)
 random.seed(42)
 
-print("TRAINING OPTIMIZED MODEL (NO DATA LEAKAGE)")
+print("TRAINING OPTIMIZED MODEL")
 # It made more sense to save and load engineered features as files opposed to saving in a DB
 # Future enhancements -> I would take a db approach for more automation (Files locs names etc can change but DB logic is consistent)
 print("\nLoading engineered features from separate files")
