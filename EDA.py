@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import warnings
 
 def getDatasetOverview():
-    """Get comprehensive overview of entire water data set"""    
+    # Get comprehensive overview of entire water data set   
     engine = database.getSQLAlchemyEngine()
 
     overviewQuery = """
@@ -53,7 +53,7 @@ def getDatasetOverview():
     return overview, stateSummary, paramAvailability
 
 def displayOverview():
-    """Display formatted overview of dataset"""
+    # Display formatted overview of dataset
 
     overview, stateSummary, parameterAvail = getDatasetOverview()
     
