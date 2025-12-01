@@ -4,7 +4,7 @@ from datetime import datetime
 import database
 
 def getSites(stateCode, startDate, endDate):
-    """Get all water monitoring sites within a state by state code. E.g. Wisconsin = WI, Minnesota = MN...."""
+    # Get all water monitoring sites within a state by state code. E.g. Wisconsin = WI, Minnesota = MN....
     initURL = "https://waterservices.usgs.gov/nwis/dv/"
 
     parameters = {
@@ -20,7 +20,6 @@ def getSites(stateCode, startDate, endDate):
         response.raise_for_status()
         data = response.json()
 
-        # Using set to prevent dupes
         sites = []
         seen_sites = set()
         
@@ -48,7 +47,7 @@ def getSites(stateCode, startDate, endDate):
         return []
 
 def getWaterData(siteCode, startDate, endDate, metrics):
-    """Get specified water metrics from specified sites within a date range."""
+    # Get specified water metrics from specified sites within a date range.
 
     initURL = "https://waterservices.usgs.gov/nwis/dv/"
     
@@ -87,7 +86,7 @@ def getWaterData(siteCode, startDate, endDate, metrics):
         return []
     
 def getWaterDataContinuous(siteCode, startDate, endDate, metrics):
-    """Get continuous water metrics from specified sites within a date range."""
+    # Get continuous water metrics from specified sites within a date range.
     
     # Use instantaneous values service instead of daily values
     initURL = "https://waterservices.usgs.gov/nwis/iv/"  # 'iv' = instantaneous values
@@ -128,7 +127,7 @@ def getWaterDataContinuous(siteCode, startDate, endDate, metrics):
         return []    
 
 def getWaterDataDaily(siteCode, startDate, endDate, metrics):
-    """Get daily water metrics (for suspended sediment data)"""
+    # Get daily water metrics (for suspended sediment data)
     initURL = "https://waterservices.usgs.gov/nwis/dv/"  # Daily values
     
     parameters = {
@@ -166,7 +165,7 @@ def getWaterDataDaily(siteCode, startDate, endDate, metrics):
         return []
 
 def getCompleteWaterData(siteCode, startDate, endDate):
-    """Get both continuous and daily data for a site"""
+    # Get both continuous and daily data for a site
     
     # Get continuous data (discharge, gage height, elevation)
     continuous_params = '00060,00065,63160'  # discharge, gage height, stream elevation
@@ -176,13 +175,12 @@ def getCompleteWaterData(siteCode, startDate, endDate):
     daily_params = '80154,80155'  # suspended sediment concentration and discharge
     daily_data = getWaterDataDaily(siteCode, startDate, endDate, daily_params)
     
-    # Combine both datasets
     all_data = continuous_data + daily_data
     
     return all_data
 
 def exploreAllParameters(siteCode, startDate, endDate):
-    """Get all available parameters for a site to see what's actually there"""
+    # Get all available parameters for a site to see what's actually there
     initURL = "https://waterservices.usgs.gov/nwis/iv/"
     
     # Don't specify parameter - get ALL available parameters
@@ -215,7 +213,7 @@ def exploreAllParameters(siteCode, startDate, endDate):
         return {}
 
 def validateDataStructure(water_records):
-    """Ensure data structure matches database expectations"""
+    # Ensure data structure matches database expectations
     required_fields = ['site_code', 'date', 'discharge', 'gage_height', 
                       'stream_elevation', 'temperature', 'dissolved_oxygen']
     
@@ -228,10 +226,9 @@ def validateDataStructure(water_records):
     return True
 
 def getStandardizedWaterData(siteCode, startDate, endDate):
-    """
-    Collect 5 standard water metrics, filling missing metrics with -999.
-    Returns consistent data structure regardless of site parameter availability.
-    """
+    #Collect 5 standard water metrics, filling missing metrics with -999.
+    #Returns consistent data structure regardless of site parameter availability.
+    
     
     TARGET_PARAMS = {
         '00060': 'Discharge, cubic feet per second',
@@ -273,7 +270,7 @@ def getStandardizedWaterData(siteCode, startDate, endDate):
     return standardized_data
 
 def demonstrateAPICollection(stateCode, numSites, startDate, endDate):
-    """Demonstrate live API collection and database storage for checkpoint presentation"""
+    #Demonstrate live API collection and database storage for checkpoint presentation
     
     print(f"=== Demonstrating API Collection for {stateCode} ===")
     
