@@ -1,6 +1,3 @@
-filename1.py
-filename2.py
-filename3.py
 __pycache__/
 *.pyc
 .DS_Store
