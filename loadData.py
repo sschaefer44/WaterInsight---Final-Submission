@@ -36,7 +36,7 @@ def loadData():
     return df
 
 def loadModelReadyData(filepath):
-    """Load the engineered features dataset from CSV to dataframe"""
+    #Load the engineered features dataset from CSV to dataframe
     print(f"Loading Engineered Data")
 
     df = pd.read_csv(filepath)
@@ -47,7 +47,7 @@ def loadModelReadyData(filepath):
     return df
 
 def loadFeatureNames(filepath):
-    """Load Feature Column Names"""
+    #Load Feature Column Names
 
     with open(filepath, 'r') as f:
         features = [line.strip() for line in f.readlines()]
