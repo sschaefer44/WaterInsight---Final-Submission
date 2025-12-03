@@ -174,7 +174,6 @@ if __name__ == "__main__":
     if 'year' not in df.columns:
         df['year'] = df['date'].dt.year
     
-    # USING BALANCED SPLIT
     trainDf, valDf, testDf = balancedTimeSeriesSplit(df, 'discharge')
     
     print("\nStep 3: Engineering features")
